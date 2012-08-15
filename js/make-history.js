@@ -78,7 +78,7 @@ navigator.geolocation.getCurrentPosition(locationSuccess, locationFail);
 
       function getNews() {
         $.ajax({
-          url: "proxy.php",
+          url: "php/proxy.php",
           dataType : "json",
           success: function (data, ts, xhr) {
             console.log(typeof data)
@@ -93,42 +93,6 @@ navigator.geolocation.getCurrentPosition(locationSuccess, locationFail);
         });
       }
 
-      //Nearby
-
-      function getNearby(newsUrl, lat, long) {
-        $.ajax({
-          url: newsUrl,
-          data: {
-            "lat": lat,
-            "long": long
-          },
-          dataType: "json",
-          success: function (data, ts, xhr) {
-            console.log(data)
-            console.log(xhr)
-          },
-          error: function (data, textStatus, error) {
-            console.log(textStatus)
-          }
-        });
-      }
-
-      //Bible
-      //http://www.esvapi.org/v2/rest/passageQuery?key=IP&passage=Mark+5&output-format=crossway-xml-1.0
-      function getVerses(weather) {
-        $.ajax({
-          url: "proxyverses.php",
-          data: {
-            "weather": weather
-          },
-          success: function (data, ts, xhr) {
-            $("#verses").html(data)
-          },
-          error: function (data, textStatus, error) {
-            console.log(textStatus)
-          }
-        });
-      }
 
       function getTweets(q){
       	 $.ajax({
