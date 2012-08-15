@@ -7,7 +7,7 @@ navigator.geolocation.getCurrentPosition(locationSuccess, locationFail);
         var latitude = position.coords.latitude;
         var longitude = position.coords.longitude;
         getWeather("http://api.wunderground.com/api/" + key + "/geolookup/conditions/q/" + latitude + "," + longitude + ".json")
-        getNews("proxy.php");
+        getNews();
 
         //getNearby("proxygeo.php", latitude, longitude)
 
@@ -76,11 +76,12 @@ navigator.geolocation.getCurrentPosition(locationSuccess, locationFail);
 
       //News
 
-      function getNews(newsUrl) {
+      function getNews() {
         $.ajax({
-          url: newsUrl,
-          dataType: "json",
+          url: "proxy.php",
+          dataType : "json",
           success: function (data, ts, xhr) {
+            console.log(typeof data)
             $("#news").attr({
               "href": data.results[0].url,
             }).html(data.results[0].title)
@@ -135,7 +136,6 @@ navigator.geolocation.getCurrentPosition(locationSuccess, locationFail);
           dataType:"jsonp",
           success: function (data) {
               $.each(data.results, function (i, results) {
-              	console.log(i+1)
                 $("<p>").html(results.text).appendTo("#tweet");
               });
             },
